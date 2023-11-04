@@ -497,6 +497,12 @@ actor certification {
 
     registedUsersHashmap := HashMap.fromIter<Principal, User>(registeredEntries.vals(), 1, Principal.equal, Principal.hash);
 
+    };
+
+};
+
+```
+
 
 <<<<<<< Updated upstream
 ## Mobile-Calcy
@@ -756,15 +762,3 @@ body {
     "ts-loader": "^9.5.0"
   },
   ```
-
-
-=======
-      
-    
-  };
-
-};
-
-```
-
->>>>>>> Stashed changes

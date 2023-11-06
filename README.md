@@ -1904,3 +1904,218 @@ reset.addEventListener('click', (e) => {
 })
 
 ```
+
+## AGE-CALCULATOR
+
+`main.mo`
+
+```js
+actor {
+  type TimeData = {
+    day: Nat32;
+    month: Nat32;
+    year: Nat32;
+  };
+
+  type TimeDataInput = {
+    date: Nat32;
+    month: Nat32;
+    year: Nat32;
+  };
+
+  public func ageCalculate(currentData : TimeDataInput, birthData: TimeDataInput) : async TimeData {
+    var years = currentData.year - birthData.year;
+    var months : Nat32 = 0;
+    var days : Nat32 = 0;
+
+    if(currentData.month >= birthData.month){
+      months := currentData.month - birthData.month;
+    }else{
+      months := birthData.month - currentData.month;
+      years -= 1;
+      months := 12 - months;
+    };
+
+    if(currentData.date >= birthData.date){
+      days := currentData.date - birthData.date;
+    }else{
+      days := birthData.date - currentData.date;
+      days := days + (30 - currentData.date);
+      months -= 1;
+    };
+
+    var data = {
+      day = days;
+      month = months;
+      year = years;
+    };
+    return data;
+  };
+};
+
+```
+`main.css`
+
+```js
+body {
+    font-family: sans-serif;
+    font-size: 1.1rem;
+}
+
+img {
+    max-width: 50vw;
+    max-height: 25vw;
+    display: block;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    flex-flow: row wrap;
+    max-width: 40vw;
+    margin: auto;
+    align-items: baseline;
+}
+
+button[type="submit"] {
+    padding: 5px 20px;
+    margin: 10px auto;
+    float: right;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.calculator {
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-container label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.input-container input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#calculate-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#result {
+    margin-top: 20px;
+    word-wrap: break-word;
+}
+```
+`index.html`
+```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Age Calculator</title>
+    <base href="/" />
+    <link rel="icon" href="favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <main>
+      <div class="calculator">
+        <h2>Age Calculator</h2>
+        <div class="input-container">
+            <label for="birthdate">Enter your birthdate:</label>
+            <input type="date" id="birthdate">
+        </div>
+        <button id="calculate-button">Calculate Age</button>
+        <div id="result"></div>
+    </div>
+    </main>
+  </body>
+</html>
+
+```
+
+`index.js`
+
+```js
+import { age_calculator_backend } from "../../declarations/age_calculator_backend";
+
+const calculateButton = document.getElementById('calculate-button');
+const result = document.getElementById('result');
+
+calculateButton.addEventListener('click', async () => {
+  try {
+    result.textContent = '';
+    const birthTime = new Date(document.getElementById('birthdate').value);
+    let currentTime = new Date();
+
+    let currentYear = currentTime.getFullYear();
+    let birthYear = birthTime.getFullYear();
+    let currentMonth = currentTime.getMonth();
+    let birthMonth = birthTime.getMonth();
+    let currentDate = currentTime.getDate();
+    let birthDate = birthTime.getDate();
+
+    let currentData = {
+      date: currentDate,
+      month: currentMonth,
+      year: currentYear
+    }
+
+    let birthData = {
+      date: birthDate,
+      month: birthMonth,
+      year: birthYear
+    }
+
+    let data = await age_calculator_backend.ageCalculate(currentData, birthData);
+
+    result.textContent = `${data.year} years ${data.month} months ${data.day} days`;
+  } catch (error) {
+    result.textContent = error;
+  }
+});
+
+```

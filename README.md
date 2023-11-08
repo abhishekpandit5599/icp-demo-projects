@@ -1,7 +1,9 @@
 ## Demo Projects on ICP
 
 ### File Storing System in ICP
+
 `main.mo`
+
 ```js
 import Text "mo:base/Text";
 import Error "mo:base/Error";
@@ -58,9 +60,10 @@ actor {
 };
 ```
 
-
 ### ToDo with login in motoko
+
 `main.mo`
+
 ```js
 import HashMap "mo:base/HashMap";
 import Bool "mo:base/Bool";
@@ -216,8 +219,7 @@ actor UserRegistration {
 };
 ```
 
-
-### Simple TODO  without Login 
+### Simple TODO without Login
 
 `main.mo`
 
@@ -236,7 +238,7 @@ actor Assistant {
     completed: Bool;
   };
 
-  func natHash(n : Nat) : Hash.Hash { 
+  func natHash(n : Nat) : Hash.Hash {
     Text.hash(Nat.toText(n))
   };
 
@@ -272,11 +274,12 @@ actor Assistant {
   };
 
   public func clearCompleted() : async () {
-    todos := Map.mapFilter<Nat, ToDo, ToDo>(todos, Nat.equal, natHash, 
+    todos := Map.mapFilter<Nat, ToDo, ToDo>(todos, Nat.equal, natHash,
               func(_, todo) { if (todo.completed) null else ?todo });
   };
 }
 ```
+
 `index.html`
 
 ```js
@@ -306,68 +309,70 @@ actor Assistant {
         </div>
     </div>
     <div class="todolist">
-        
+
     </div>
 </body>
 
 </html>
 ```
+
 `index.js`
+
 ```js
-const inputtdl = document.querySelector('.textarea')
-const buttontdl = document.querySelector('.buttoninput')
-const listtdl = document.querySelector('.todolist')
+const inputtdl = document.querySelector(".textarea");
+const buttontdl = document.querySelector(".buttoninput");
+const listtdl = document.querySelector(".todolist");
 
 function clickButton(e) {
-    e.preventDefault()
-    addTodo()
+  e.preventDefault();
+  addTodo();
 }
 
 // adding todoList
 function addTodo() {
-    const itemall = document.createElement('div')
-    itemall.classList.add('itemall')
+  const itemall = document.createElement("div");
+  itemall.classList.add("itemall");
 
-    const item = document.createElement('p')
-    item.classList.add('item')
-    item.innerText = inputtdl.value
-    itemall.appendChild(item)
+  const item = document.createElement("p");
+  item.classList.add("item");
+  item.innerText = inputtdl.value;
+  itemall.appendChild(item);
 
-    if (inputtdl.value === '') return
+  if (inputtdl.value === "") return;
 
-    const checkbutton = document.createElement("button")
-    checkbutton.innerHTML = '<i class="fa-solid fa-check"></i>'
-    checkbutton.classList.add("check-button")
-    itemall.appendChild(checkbutton)
+  const checkbutton = document.createElement("button");
+  checkbutton.innerHTML = '<i class="fa-solid fa-check"></i>';
+  checkbutton.classList.add("check-button");
+  itemall.appendChild(checkbutton);
 
-    const trashbutton = document.createElement("button")
-    trashbutton.innerHTML = '<i class="fa-solid fa-trash"></i>'
-    trashbutton.classList.add("trash-button")
-    itemall.appendChild(trashbutton)
+  const trashbutton = document.createElement("button");
+  trashbutton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+  trashbutton.classList.add("trash-button");
+  itemall.appendChild(trashbutton);
 
-    listtdl.appendChild(itemall)
-    inputtdl.value = ''
+  listtdl.appendChild(itemall);
+  inputtdl.value = "";
 }
 
-// checking and delete todoList 
+// checking and delete todoList
 function okdel(e) {
-    const item = e.target
+  const item = e.target;
 
-    // check
-    if (item.classList[0] === 'check-button') {
-        const todolist = item.parentElement
-        todolist.classList.toggle('checklist')
-    }
+  // check
+  if (item.classList[0] === "check-button") {
+    const todolist = item.parentElement;
+    todolist.classList.toggle("checklist");
+  }
 
-    // delete
-    if (item.classList[0] === 'trash-button') {
-        const todolist = item.parentElement
-        todolist.remove()
-    }
+  // delete
+  if (item.classList[0] === "trash-button") {
+    const todolist = item.parentElement;
+    todolist.remove();
+  }
 }
 
-buttontdl.addEventListener('click', clickButton)
-listtdl.addEventListener('click', okdel)
+buttontdl.addEventListener("click", clickButton);
+listtdl.addEventListener("click", okdel);
 ```
 
 `main.css`
@@ -509,6 +514,7 @@ button, .check-button, .trash-button {
 ```
 
 ### Guest Book
+
 ```js
 import List "mo:base/const inputtdl = document.querySelector('.textarea')
 const buttontdl = document.querySelector('.buttoninput')
@@ -545,7 +551,7 @@ function addTodo() {
     inputtdl.value = ''
 }
 
-// checking and delete todoList 
+// checking and delete todoList
 function okdel(e) {
     const item = e.target
 
@@ -676,8 +682,11 @@ actor {
   };
 };
 ```
+
 ### Blockchain-based Certification System
+
 `main.mo`
+
 ```js
 import HashMap "mo:base/HashMap";
 import Principal "mo:base/Principal";
@@ -754,7 +763,7 @@ actor certification {
         Debug.print("Certificate has been issued!");
         userFound := true;
         // return "you are already registered buddy!";
-      } 
+      }
     };
 
     if(userFound == false){
@@ -789,8 +798,8 @@ actor certification {
 
 ```
 
-
 <<<<<<< Updated upstream
+
 ## Mobile-Calcy
 
 `main.mo`
@@ -960,6 +969,7 @@ function App() {
 
 export default App;
 ```
+
 `main.css`
 
 ```js
@@ -1028,6 +1038,7 @@ body {
 ```
 
 `package.json`
+
 ```js
 // change your depedencies with this in package.json
 
@@ -1047,7 +1058,8 @@ body {
     "react-dom": "^17.0.2",
     "ts-loader": "^9.5.0"
   },
-  ```
+```
+
 ## BMI CALCULATOR
 
 `main.mo`
@@ -1066,7 +1078,7 @@ actor {
             } else {
                 "Obesity"
             };
-        
+
         return (bmi, category);
     }
 
@@ -1086,7 +1098,7 @@ actor {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     }
-    
+
     body{
     display: flex;
     align-items: center;
@@ -1094,7 +1106,7 @@ actor {
     min-height: 100vh;
     background: rgb(97,138,254,0.9);
     }
-/* 
+/*
   .container {
     min-width: 250px;
   } */
@@ -1114,16 +1126,16 @@ actor {
     font-weight: bold;
     font-size: 36px;
     padding: 30px 0;
-    
+
   }
 
 
-    
+
     .content {
         padding: 0 30px;
-        
+
     }
-    
+
     .input {
         background: #fff;
         box-shadow: 0px 0px 95px -30px rgba(0, 0, 0, 0.15);
@@ -1132,7 +1144,7 @@ actor {
         margin-bottom: 20px;
     }
 
-    
+
     .input label {
         display: block;
         font-size: 18px;
@@ -1151,7 +1163,7 @@ actor {
     }
 
 
-    
+
     .inputW {
         background: #fff;
         box-shadow: 0px 0px 95px -30px rgba(0, 0, 0, 0.15);
@@ -1205,7 +1217,7 @@ actor {
         font-family: "Nunito", sans-serif;
     }
 
-  
+
 button.calculate {
     cursor: pointer;
     font-family: "Nunito", sans-serif;
@@ -1223,8 +1235,8 @@ button.calculate {
     background: #0044ff;
   }
 
-  
-  
+
+
 .result {
     padding: 10px 20px;
   }
@@ -1302,14 +1314,14 @@ button.calculate {
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   /* Hide the browser's default radio button */
   .gender .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
   }
-  
+
   /* Create a custom radio button */
   .checkmark {
     position: absolute;
@@ -1320,29 +1332,29 @@ button.calculate {
     background-color: #eee;
     border-radius: 50%;
   }
-  
+
   /* On mouse-over, add a grey background color */
   .gender .container:hover input ~ .checkmark {
     background-color: #ccc;
   }
-  
+
   /* When the radio button is checked, add a blue background */
   .gender .container input:checked ~ .checkmark {
     background-color: #2196F3;
   }
-  
+
   /* Create the indicator (the dot/circle - hidden when not checked) */
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
-  
+
   /* Show the indicator (dot/circle) when checked */
   .gender .container input:checked ~ .checkmark:after {
     display: block;
   }
-  
+
   /* Style the indicator (dot/circle) */
   .gender .container .checkmark:after {
        top: 9px;
@@ -1359,7 +1371,7 @@ button.calculate {
     justify-content: space-around;
     align-items: center;
 }
-  
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -1415,7 +1427,7 @@ border: 2px solid red;
 }
 
 .close:hover {
-  color: #d41111; 
+  color: #d41111;
 }
 
 .linkDownload {
@@ -1437,12 +1449,12 @@ border: 2px solid red;
 .linkDownload i {
     padding-left: 7px;
   }
-  
+
   .linkDownload:hover {
     text-decoration: none;
     background-color: black;
   }
-  
+
 @media (max-width: 700px){
     .box {
         width: 380px;
@@ -1466,12 +1478,11 @@ border: 2px solid red;
     }
 }
 ```
-`index.js`
-```js
-import {
-  BMI_backend
-} from "../../declarations/BMI_backend";
 
+`index.js`
+
+```js
+import { BMI_backend } from "../../declarations/BMI_backend";
 
 var age = document.getElementById("age");
 var height = document.getElementById("height");
@@ -1486,8 +1497,6 @@ var modalText = document.querySelector("#modalText");
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
-
-
 document.getElementById("submit").addEventListener("click", async (e) => {
   e.preventDefault();
   const button = e.target;
@@ -1495,7 +1504,7 @@ document.getElementById("submit").addEventListener("click", async (e) => {
   // const name = document.getElementById("name").value.toString();
 
   button.disabled = true;
-  calculate()
+  calculate();
 
   button.disabled = false;
 
@@ -1503,16 +1512,18 @@ document.getElementById("submit").addEventListener("click", async (e) => {
 });
 
 function calculate() {
-
-  if (age.value == '' || height.value == '' || weight.value == '' || (male.checked == false && female.checked == false)) {
+  if (
+    age.value == "" ||
+    height.value == "" ||
+    weight.value == "" ||
+    (male.checked == false && female.checked == false)
+  ) {
     modal.style.display = "block";
     modalText.innerHTML = `All fields are required!`;
   } else {
     countBmi();
   }
-
 }
-
 
 async function countBmi() {
   var p = [age.value, height.value, weight.value];
@@ -1522,30 +1533,36 @@ async function countBmi() {
     p.push("female");
   }
 
-  const bmi_data = await BMI_backend.calculateBMI(parseFloat(p[2]), parseFloat(p[1]));
+  const bmi_data = await BMI_backend.calculateBMI(
+    parseFloat(p[2]),
+    parseFloat(p[1])
+  );
 
   const bmi = bmi_data[0];
   const result = bmi_data[1];
 
   resultArea.style.display = "block";
-  document.querySelector(".comment").innerHTML = `You are <span id="comment">${result}</span>`;
+  document.querySelector(
+    ".comment"
+  ).innerHTML = `You are <span id="comment">${result}</span>`;
   document.querySelector("#result").innerHTML = bmi.toFixed(2);
-
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
   modal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 ```
+
 `index.html`
+
 ```js
 <!DOCTYPE html>
 <html lang="en">
@@ -1653,6 +1670,7 @@ actor {
   };
 };
 ```
+
 `main.css`
 
 ```js
@@ -1772,6 +1790,7 @@ nav ul li{
     }
 }
 ```
+
 `index.html`
 
 ```js
@@ -1818,7 +1837,7 @@ nav ul li{
             </div>
         </div>
     </div>
-    
+
 </body>
 </html>
 
@@ -1829,80 +1848,84 @@ nav ul li{
 ```js
 import { tic_tac_toe_game_backend } from "../../declarations/tic_tac_toe_game_backend";
 
-let turn = 'X'
+let turn = "X";
 let gameOver = false;
 let gameWorkingNow = false;
 let status = document.getElementById("status");
 
 // Function to change the turn
 const changeTurn = async () => {
-    let nextTurn = await tic_tac_toe_game_backend.changeTurn(turn);
-    return nextTurn;
-}
+  let nextTurn = await tic_tac_toe_game_backend.changeTurn(turn);
+  return nextTurn;
+};
 
 // Function to check for a win
 const checkWin = async () => {
-    gameWorkingNow = true;
-    status.innerText = "Processing";
-    let boxtext = document.getElementsByClassName('boxtext');
-    let wins = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ]
-    for(let i=0;i<wins.length;i++){
-        let data = {
-            box0: boxtext[wins[i][0]].innerText,
-            box1: boxtext[wins[i][1]].innerText,
-            box2: boxtext[wins[i][2]].innerText
-        }
-        let result = await tic_tac_toe_game_backend.checkWin(data);
-        if (result) {
-            document.querySelector('.info').innerText = 'Player ' + boxtext[wins[i][0]].innerText + ' Won'
-            gameOver = true
-            document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = '200px';
-            status.innerText = '';
-            gameWorkingNow = false;
-        }
+  gameWorkingNow = true;
+  status.innerText = "Processing";
+  let boxtext = document.getElementsByClassName("boxtext");
+  let wins = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < wins.length; i++) {
+    let data = {
+      box0: boxtext[wins[i][0]].innerText,
+      box1: boxtext[wins[i][1]].innerText,
+      box2: boxtext[wins[i][2]].innerText,
+    };
+    let result = await tic_tac_toe_game_backend.checkWin(data);
+    if (result) {
+      document.querySelector(".info").innerText =
+        "Player " + boxtext[wins[i][0]].innerText + " Won";
+      gameOver = true;
+      document
+        .querySelector(".imgbox")
+        .getElementsByTagName("img")[0].style.width = "200px";
+      status.innerText = "";
+      gameWorkingNow = false;
     }
-   
-    status.innerText = '';
-    gameWorkingNow = false;
-}
+  }
+
+  status.innerText = "";
+  gameWorkingNow = false;
+};
 
 // Game Logic
-let boxes = document.getElementsByClassName('box');
-Array.from(boxes).forEach(element => {
-    let boxtext = element.querySelector('.boxtext');
-    element.addEventListener('click', async () => {
-        if (boxtext.innerText === '' && !gameOver && !gameWorkingNow) {
-            boxtext.innerText = turn;
-            turn = await changeTurn();
-            await checkWin();
-            if (!gameOver) {
-                document.getElementsByClassName('info')[0].innerText = 'Turn for : ' + turn;
-            }
-        }
-    })
-})
+let boxes = document.getElementsByClassName("box");
+Array.from(boxes).forEach((element) => {
+  let boxtext = element.querySelector(".boxtext");
+  element.addEventListener("click", async () => {
+    if (boxtext.innerText === "" && !gameOver && !gameWorkingNow) {
+      boxtext.innerText = turn;
+      turn = await changeTurn();
+      await checkWin();
+      if (!gameOver) {
+        document.getElementsByClassName("info")[0].innerText =
+          "Turn for : " + turn;
+      }
+    }
+  });
+});
 
 // Reset function
-reset.addEventListener('click', (e) => {
-    let boxtext = document.querySelectorAll('.boxtext');
-    Array.from(boxtext).forEach(element => {
-        element.innerText = ''
-    });
-    turn = 'X';
-    document.getElementsByClassName('info')[0].innerText = 'Turn for : ' + turn;
-    gameOver = false;
-    document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = '0'
-})
-
+reset.addEventListener("click", (e) => {
+  let boxtext = document.querySelectorAll(".boxtext");
+  Array.from(boxtext).forEach((element) => {
+    element.innerText = "";
+  });
+  turn = "X";
+  document.getElementsByClassName("info")[0].innerText = "Turn for : " + turn;
+  gameOver = false;
+  document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width =
+    "0";
+});
 ```
 
 ## AGE-CALCULATOR
@@ -1954,6 +1977,7 @@ actor {
 };
 
 ```
+
 `main.css`
 
 ```js
@@ -2048,7 +2072,9 @@ h1 {
     word-wrap: break-word;
 }
 ```
+
 `index.html`
+
 ```js
 <!DOCTYPE html>
 <html lang="en">
@@ -2082,13 +2108,13 @@ h1 {
 ```js
 import { age_calculator_backend } from "../../declarations/age_calculator_backend";
 
-const calculateButton = document.getElementById('calculate-button');
-const result = document.getElementById('result');
+const calculateButton = document.getElementById("calculate-button");
+const result = document.getElementById("result");
 
-calculateButton.addEventListener('click', async () => {
+calculateButton.addEventListener("click", async () => {
   try {
-    result.textContent = '';
-    const birthTime = new Date(document.getElementById('birthdate').value);
+    result.textContent = "";
+    const birthTime = new Date(document.getElementById("birthdate").value);
     let currentTime = new Date();
 
     let currentYear = currentTime.getFullYear();
@@ -2101,21 +2127,236 @@ calculateButton.addEventListener('click', async () => {
     let currentData = {
       date: currentDate,
       month: currentMonth,
-      year: currentYear
-    }
+      year: currentYear,
+    };
 
     let birthData = {
       date: birthDate,
       month: birthMonth,
-      year: birthYear
-    }
+      year: birthYear,
+    };
 
-    let data = await age_calculator_backend.ageCalculate(currentData, birthData);
+    let data = await age_calculator_backend.ageCalculate(
+      currentData,
+      birthData
+    );
 
     result.textContent = `${data.year} years ${data.month} months ${data.day} days`;
   } catch (error) {
     result.textContent = error;
   }
 });
+```
 
+## FLAPPY BIRD GAME 
+
+`main.mo`
+
+```js
+actor {
+  type BoxInputData = {
+    box0 : Text;
+    box1 : Text;
+    box2 : Text;
+  };
+
+  public query func changeTurn(turn : Text) : async Text {
+    var result : Text = "";
+    if (turn == "X") {
+      result := "0";
+    } else {
+      result := "X";
+    };
+    return result;
+  };
+
+  public func checkWin(data : BoxInputData) : async Bool {
+    if ((data.box0 == data.box1) and (data.box2 == data.box1) and (data.box0 != "")) {
+      return true;
+    };
+    return false;
+  };
+};
+```
+`index.html`
+
+```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body onload="startGame()">
+    <h1>Flappy Bird Game</h1>
+    <script>
+      var myGamePiece;
+      var myObstacles = [];
+      var myScore;
+      function startGame() {
+        myGamePiece = new component(30, 30, "red", 10, 120);
+        myGamePiece.gravity = 0.05;
+        myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+        myGameArea.start();
+      }
+
+      var myGameArea = {
+        canvas: document.createElement("canvas"),
+        start: function () {
+          this.canvas.width = 480;
+          this.canvas.height = 270;
+          this.context = this.canvas.getContext("2d");
+          document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+          this.frameNo = 0;
+          this.interval = setInterval(updateGameArea, 20);
+        },
+        clear: function () {
+          this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        },
+      };
+
+      function component(width, height, color, x, y, type) {
+        this.type = type;
+        this.score = 0;
+        this.width = width;
+        this.height = height;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.x = x;
+        this.y = y;
+        this.gravity = 0;
+        this.gravitySpeed = 0;
+        this.update = function () {
+          ctx = myGameArea.context;
+          if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+          } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+          }
+        };
+        this.newPos = function () {
+          this.gravitySpeed += this.gravity;
+          this.x += this.speedX;
+          this.y += this.speedY + this.gravitySpeed;
+          this.hitBottom();
+        };
+        this.hitBottom = function () {
+          var rockbottom = myGameArea.canvas.height - this.height;
+          if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+          }
+        };
+        this.crashWith = function (otherobj) {
+          var myleft = this.x;
+          var myright = this.x + this.width;
+          var mytop = this.y;
+          var mybottom = this.y + this.height;
+          var otherleft = otherobj.x;
+          var otherright = otherobj.x + otherobj.width;
+          var othertop = otherobj.y;
+          var otherbottom = otherobj.y + otherobj.height;
+          var crash = true;
+          if (
+            mybottom < othertop ||
+            mytop > otherbottom ||
+            myright < otherleft ||
+            myleft > otherright
+          ) {
+            crash = false;
+          }
+          return crash;
+        };
+      }
+
+      function updateGameArea() {
+        var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+        for (i = 0; i < myObstacles.length; i += 1) {
+          if (myGamePiece.crashWith(myObstacles[i])) {
+            return;
+          }
+        }
+        myGameArea.clear();
+        myGameArea.frameNo += 1;
+        if (myGameArea.frameNo == 1 || everyinterval(150)) {
+          x = myGameArea.canvas.width;
+          minHeight = 20;
+          maxHeight = 200;
+          height = Math.floor(
+            Math.random() * (maxHeight - minHeight + 1) + minHeight
+          );
+          minGap = 50;
+          maxGap = 200;
+          gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
+          myObstacles.push(new component(10, height, "green", x, 0));
+          myObstacles.push(
+            new component(10, x - height - gap, "green", x, height + gap)
+          );
+        }
+        for (i = 0; i < myObstacles.length; i += 1) {
+          myObstacles[i].x += -1;
+          myObstacles[i].update();
+        }
+        myScore.text = "SCORE: " + myGameArea.frameNo;
+        myScore.update();
+        myGamePiece.newPos();
+        myGamePiece.update();
+      }
+
+      function everyinterval(n) {
+        if ((myGameArea.frameNo / n) % 1 == 0) {
+          return true;
+        }
+        return false;
+      }
+
+      function accelerate(n) {
+        myGamePiece.gravity = n;
+      }
+    </script>
+    <br />
+    <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">
+      ACCELERATE
+    </button>
+    <p>Use the ACCELERATE button to stay in the air</p>
+    <p>How long can you stay alive?</p>
+  </body>
+</html>
+
+```
+`main.css`
+```js
+canvas {
+  border: 1px solid #d3d3d3;
+  background-color: #f1f1f1;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+h1 {
+  font-size: 36px;
+}
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #45a049;
+}
+p {
+  margin-top: 10px;
+  font-size: 18px;
+}
 ```
